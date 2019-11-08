@@ -8,7 +8,7 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    
+                    This is the about page. 
                 </div>
             </div>
         </div>

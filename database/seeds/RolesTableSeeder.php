@@ -2,7 +2,7 @@
 # @Author: maerielbenedicto
 # @Date:   2019-10-22T00:43:56+01:00
 # @Last modified by:   maerielbenedicto
-# @Last modified time: 2019-10-22T00:48:26+01:00
+# @Last modified time: 2019-11-07T15:41:14+00:00
 
 
 
@@ -27,7 +27,7 @@ class RolesTableSeeder extends Seeder
 
         $role_user = new Role();
         $role_user->name = 'user';
-        $role_user->description = 'An ordinary user';
+        $role_user->description = 'A Member user';
         $role_user->save();
     }
 }

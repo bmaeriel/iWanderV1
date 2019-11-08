@@ -13,8 +13,17 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in as an Admin!
+                    Welcome {{ Auth::user()->name }}
+                    <br/>
+                    <a href="{{route('admin.countries.index')}}">Countries</a>
+                    <br/>
+                    <a href="{{route('admin.districts.index')}}">Districts</a>
+                    <br/>
+                    <a href="{{route('admin.cities.index')}}">Cities</a>
+                    <br/>
+                    <a href="{{route('admin.municipalities.index')}}">Municipalities</a>
+                    <br/>
+                    <a href="{{route('admin.addresses.index')}}">Addresses</a>
                 </div>
             </div>
         </div>
