@@ -2,7 +2,7 @@
 # @Author: maerielbenedicto
 # @Date:   2019-11-08T14:35:23+00:00
 # @Last modified by:   maerielbenedicto
-# @Last modified time: 2019-11-08T19:06:07+00:00
+# @Last modified time: 2019-11-08T19:28:22+00:00
 
 
 
@@ -19,6 +19,14 @@ use App\Address;
 
 class AddressController extends Controller
 {
+
+  public function __construct()
+  {
+    //to be able to use the function, need to be authorized
+      $this->middleware('auth');
+      $this->middleware('role:admin');
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -68,7 +76,7 @@ class AddressController extends Controller
         'municipality_id' => 'required|integer',
         'city_id' => 'required|integer',
         'district_id' => 'required|integer',
-        'postal_code' => 'integer',
+        'postal_code' => 'numeric|min:0',
         'country_id' => 'required|integer'
       ]);
 
@@ -167,7 +175,7 @@ class AddressController extends Controller
         'municipality_id' => 'required|integer',
         'city_id' => 'required|integer',
         'district_id' => 'required|integer',
-        'postal_code' => 'integer',
+        'postal_code' => 'numeric|min:0',
         'country_id' => 'required|integer'
       ]);
 
@@ -183,9 +191,6 @@ class AddressController extends Controller
       $address->save();
 
       return redirect()->route('admin.addresses.index');
-
-
-
     }
 
     /**

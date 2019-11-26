@@ -64,7 +64,7 @@ Route::get('/admin/municipalities/{id}/edit', 'Admin\MunicipalityController@edit
 Route::put('/admin/municipalities/{id}', 'Admin\MunicipalityController@update')->name('admin.municipalities.update');
 Route::delete('/admin/municipalities/{id}', 'Admin\MunicipalityController@destroy')->name('admin.municipalities.destroy');
 
-//Municipalities
+//Addresses
 Route::get('/admin/addresses', 'Admin\AddressController@index')->name('admin.addresses.index');
 Route::get('/admin/addresses/create', 'Admin\AddressController@create')->name('admin.addresses.create');
 Route::get('/admin/addresses/{id}', 'Admin\AddressController@show')->name('admin.addresses.show');
@@ -72,6 +72,25 @@ Route::post('/admin/addresses/store', 'Admin\AddressController@store')->name('ad
 Route::get('/admin/addresses/{id}/edit', 'Admin\AddressController@edit')->name('admin.addresses.edit');
 Route::put('/admin/addresses/{id}', 'Admin\AddressController@update')->name('admin.addresses.update');
 Route::delete('/admin/addresses/{id}', 'Admin\AddressController@destroy')->name('admin.addresses.destroy');
+
+
+//Details
+Route::get('/admin/details', 'Admin\DetailController@index')->name('admin.details.index');
+Route::get('/admin/details/create', 'Admin\DetailController@create')->name('admin.details.create');
+Route::get('/admin/details/{id}', 'Admin\DetailController@show')->name('admin.details.show');
+Route::post('/admin/details/store', 'Admin\DetailController@store')->name('admin.details.store');
+Route::get('/admin/details/{id}/edit', 'Admin\DetailController@edit')->name('admin.details.edit');
+Route::put('/admin/details/{id}', 'Admin\DetailController@update')->name('admin.details.update');
+Route::delete('/admin/details/{id}', 'Admin\DetailController@destroy')->name('admin.details.destroy');
+
+//Categories
+Route::get('/admin/categories', 'Admin\CategoryController@index')->name('admin.categories.index');
+Route::get('/admin/categories/create', 'Admin\CategoryController@create')->name('admin.categories.create');
+Route::get('/admin/categories/{id}', 'Admin\CategoryController@show')->name('admin.categories.show');
+Route::post('/admin/categories/store', 'Admin\CategoryController@store')->name('admin.categories.store');
+Route::get('/admin/categories/{id}/edit', 'Admin\CategoryController@edit')->name('admin.categories.edit');
+Route::put('/admin/categories/{id}', 'Admin\CategoryController@update')->name('admin.categories.update');
+Route::delete('/admin/categories/{id}', 'Admin\CategoryController@destroy')->name('admin.categories.destroy');
 
 //Restaurants
 Route::get('/admin/restaurants', 'Admin\RestaurantController@index')->name('admin.restaurants.index');
@@ -81,6 +100,16 @@ Route::post('/admin/restaurants/store', 'Admin\RestaurantController@store')->nam
 Route::get('/admin/restaurants/{id}/edit', 'Admin\RestaurantController@edit')->name('admin.restaurants.edit');
 Route::put('/admin/restaurants/{id}', 'Admin\RestaurantController@update')->name('admin.restaurants.update');
 Route::delete('/admin/restaurants/{id}', 'Admin\RestaurantController@destroy')->name('admin.restaurants.destroy');
+
+//Establishment
+Route::get('/admin/establishments', 'Admin\EstablishmentController@index')->name('admin.establishments.index');
+Route::get('/admin/establishments/create', 'Admin\EstablishmentController@create')->name('admin.establishments.create');
+Route::get('/admin/establishments/{id}', 'Admin\EstablishmentController@show')->name('admin.establishments.show');
+Route::post('/admin/establishments/store', 'Admin\EstablishmentController@store')->name('admin.establishments.store');
+Route::get('/admin/establishments/{id}/edit', 'Admin\EstablishmentController@edit')->name('admin.establishments.edit');
+Route::put('/admin/establishments/{id}', 'Admin\EstablishmentController@update')->name('admin.establishments.update');
+Route::delete('/admin/establishments/{id}', 'Admin\EstablishmentController@destroy')->name('admin.establishments.destroy');
+
 
 Route::get('/user/restaurants', 'User\RestaurantController@index')->name('user.restaurants.index');
 Route::get('/user/restaurants/{id}', 'User\RestaurantController@show')->name('user.restaurants.show');

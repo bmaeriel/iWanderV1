@@ -41,5 +41,8 @@ class CreateMunicipalitiesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('municipalities');
+        // Schema::disableForeignKeyConstraints();
+        // Schema::drop('municipalities');
+        // Schema::enableForeignKeyConstraints();
     }
 }

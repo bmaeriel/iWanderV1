@@ -24,6 +24,12 @@
                     <a href="{{route('admin.municipalities.index')}}">Municipalities</a>
                     <br/>
                     <a href="{{route('admin.addresses.index')}}">Addresses</a>
+                    <br/>
+                    <a href="{{route('admin.details.index')}}">Details</a>
+                    <br/>
+                    <a href="{{route('admin.categories.index')}}">Categories</a>
+                    <br/>
+                    <a href="{{route('admin.establishments.index')}}">Establishments</a>
                 </div>
             </div>
         </div>

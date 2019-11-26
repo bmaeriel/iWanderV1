@@ -1,11 +1,4 @@
 <?php
-# @Author: maerielbenedicto
-# @Date:   2019-11-07T22:34:33+00:00
-# @Last modified by:   maerielbenedicto
-# @Last modified time: 2019-11-07T22:35:46+00:00
-
-
-
 
 namespace App\Http\Controllers\Admin;
 
@@ -14,6 +7,13 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
+  public function __construct()
+  {
+    //to be able to use the function, need to be authorized
+      $this->middleware('auth');
+      $this->middleware('role:admin');
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +21,10 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+      $restaurants = Restaurant::all();
+      return view('admin.restaurants.index')->with([
+        'restaurants' => $restaurants
+      ]);
     }
 
     /**
@@ -31,7 +34,14 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurants.create');
+      $addresses = Address::All();
+      $details = Detail::All();
+      $establishments = Establishment::All();
+      return view('admin.restaurants.create')->with([
+        'addresses' => $addresses,
+        'details' => $details,
+        'establishments' => $establishments
+      ]);
     }
 
     /**
@@ -42,7 +52,25 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'restaurant_name' => 'required|max:191',
+        'detail_id' => 'required|integer',
+        'address_id' => 'required|integer',
+        'establishment_type_id' => 'required|integer'
+      ]);
+
+      $detail = Detail::find(1);
+      $address = Address::find(1);
+      $establishment = Establishment::find(1);
+      $restaurant = new Restaurant();
+      $restaurant->restaurant_name = $request->input('restaurant_name');
+      $restaurant->detail_id = $request->input('detail_id');
+      $restaurant->address_id = $request->input('address_id');
+      $restaurant->establishment_type_id = $request->input('establishment_type_id');
+
+      $restaurant->save();
+
+      return redirect()->route('admin.restaurants.index');
     }
 
     /**
@@ -53,7 +81,17 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        //
+
+      $detail = Detail::findOrFail($id);
+      $address = Address::findOrFail($id);
+      $establishment = Establishment::findOrFail($id);
+      $restaurant = Restaurant::findOrFail($id);
+      return view('admin.restaurants.show')->with([
+        'detail' => $detail,
+        'address' => $address,
+        'establishment' => $establishment,
+        'restaurant' => $restaurant
+      ]);
     }
 
     /**
@@ -64,7 +102,23 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        //
+      $addresses = Address::All();
+      $details = Detail::All();
+      $establishments = Establishment::All();
+
+      $detail = Detail::findOrFail($id);
+      $address = Address::findOrFail($id);
+      $establishment = Establishment::findOrFail($id);
+      $restaurant = Restaurant::findOrFail($id);
+      return view('admin.restaurants.edit')->with([
+        'addresses' => $addresses,
+        'details' => $details,
+        'establishments' => $establishments,
+        'detail' => $detail,
+        'address' => $address,
+        'establishment' => $establishment,
+        'restaurant' => $restaurant
+      ]);
     }
 
     /**
@@ -76,7 +130,26 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $addresses = Address::All();
+      $details = Detail::All();
+      $establishments = Establishment::All();
+      $restaurant = Address::findOrFail($id);
+
+      $request->validate([
+        'restaurant_name' => 'required|max:191',
+        'detail_id' => 'required|integer',
+        'address_id' => 'required|integer',
+        'establishment_type_id' => 'required|integer'
+      ]);
+
+      $restaurant->restaurant_name = $request->input('restaurant_name');
+      $restaurant->detail_id = $request->input('detail_id');
+      $restaurant->address_id = $request->input('address_id');
+      $restaurant->establishment_type_id = $request->input('establishment_type_id');
+
+      $restaurant->save();
+
+      return redirect()->route('admin.restaurants.index');
     }
 
     /**
@@ -87,6 +160,8 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $restaurant = Restaurant::findOrFail($id);
+      $restaurant->delete();
+      return redirect()->route('admin.restaurants.index');
     }
 }

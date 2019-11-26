@@ -20,6 +20,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //
+        factory(App\User::class, 10)->create()->each(function($user){
+          $user->roles()->attach(Role::where('name','user')->first());
+        });
+
+
         $role_admin = Role::where('name','admin')->first();
         $role_user = Role::where('name','user')->first();
 

@@ -2,7 +2,7 @@
 # @Author: maerielbenedicto
 # @Date:   2019-11-08T02:54:08+00:00
 # @Last modified by:   maerielbenedicto
-# @Last modified time: 2019-11-08T12:40:23+00:00
+# @Last modified time: 2019-11-08T19:21:12+00:00
 
 
 
@@ -17,6 +17,13 @@ use App\City;
 
 class CityController extends Controller
 {
+  public function __construct()
+  {
+    //to be able to use the function, need to be authorized
+      $this->middleware('auth');
+      $this->middleware('role:admin');
+  }
+
     /**
      * Display a listing of the resource.
      *

@@ -2,7 +2,7 @@
 # @Author: maerielbenedicto
 # @Date:   2019-11-07T23:46:35+00:00
 # @Last modified by:   maerielbenedicto
-# @Last modified time: 2019-11-08T11:16:38+00:00
+# @Last modified time: 2019-11-08T19:21:19+00:00
 
 
 
@@ -16,6 +16,13 @@ use App\Country;
 
 class CountryController extends Controller
 {
+  public function __construct()
+  {
+    //to be able to use the function, need to be authorized
+      $this->middleware('auth');
+      $this->middleware('role:admin');
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +30,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-      $country = Country::all();
+      $country = Country::orderBy('country_name', 'asc')->get();;
       return view('admin.countries.index')->with([
         'countries' => $country
       ]);
@@ -131,7 +138,7 @@ class CountryController extends Controller
       return redirect()->route('admin.countries.index');
     }
 
-    public function getDistricts(Country $country) {
-      return $country->districts()->select('id','name')->get();
-    }
+    // public function getDistricts(Country $country) {
+    //   return $country->districts()->select('id','name')->get();
+    // }
 }
