@@ -25,7 +25,7 @@
                 <label for="category_name">Category</label>
                 <input type="text" class="form-control" id="category_name" name="category_name" value="{{ old('category_name', $category->category_name) }}" />
               </div>
-              <a href="{{ route('admin.categoriess.index') }}" class="btn btn-link"> Cancel </a>
+              <a href="{{ route('admin.categories.index') }}" class="btn btn-link"> Cancel </a>
               <button type="submit" class="btn btn-primary float-right"> Submit </button>
             </form>
           </div>

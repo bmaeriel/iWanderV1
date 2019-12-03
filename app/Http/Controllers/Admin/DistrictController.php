@@ -29,9 +29,9 @@ class DistrictController extends Controller
      */
     public function index()
     {
-      $district = District::all();
+      $districts = District::orderBy('district_name','asc')->get();
       return view('admin.districts.index')->with([
-        'districts' => $district
+        'districts' => $districts
       ]);
     }
 
@@ -42,11 +42,11 @@ class DistrictController extends Controller
      */
     public function create()
     {
-      $countries = Country::All();
-      $district = District::all();
+      $countries = Country::orderBy('country_name', 'asc')->get();
+      $districts = District::orderBy('district_name','asc')->get();
       return view('admin.districts.create')->with([
         'countries' => $countries,
-        'districts' => $district
+        'districts' => $districts
       ]);
     }
 
@@ -59,15 +59,13 @@ class DistrictController extends Controller
     public function store(Request $request)
     {
 
-      // $country = Country::all();
       $request->validate([
-        'district_name' => 'required|max:191',
+        'district_name' => 'required|max:255',
         'country_id' => 'required|integer',
-        'about' => 'required|max:191',
+        'about' => 'required|max:500',
         // 'view_count' => 'required|max:191'
       ]);
 
-      $country = Country::find(1);
       $district = new District();
       $district->district_name = $request->input('district_name');
       $district->country_id = $request->input('country_id');
@@ -87,10 +85,8 @@ class DistrictController extends Controller
     public function show($id)
     {
       $district = District::findOrFail($id);
-      $country = Country::findOrFail($id);
       return view('admin.districts.show')->with([
-        'district' => $district,
-        'country' => $country
+        'district' => $district
       ]);
     }
 
@@ -103,12 +99,10 @@ class DistrictController extends Controller
     public function edit($id)
     {
       $district = District::findOrFail($id);
-      $countries = Country::All();
-      $country = Country::findOrFail($id);
+      $countries = Country::orderBy('country_name', 'asc')->get();
       return view('admin.districts.edit')->with([
         'district' => $district,
-        'countries' => $countries,
-        'country' => $country
+        'countries' => $countries
       ]);
     }
 
@@ -121,13 +115,12 @@ class DistrictController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $country = Country::findOrFail($id);
       $district = District::findOrFail($id);
 
       $request->validate([
-        'district_name' => 'required|max:191',
+        'district_name' => 'required|max:255',
         'country_id' => 'required|integer',
-        'about' => 'required|max:255'
+        'about' => 'required|max:500'
       ]);
 
       $district->district_name = $request->input('district_name');

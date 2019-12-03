@@ -30,7 +30,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-      $country = Country::orderBy('country_name', 'asc')->get();;
+      $country = Country::orderBy('country_name', 'asc')->get();
       return view('admin.countries.index')->with([
         'countries' => $country
       ]);
@@ -56,7 +56,7 @@ class CountryController extends Controller
     {
       $request->validate([
         'country_name' => 'required|max:191',
-        'about' => 'required|max:191',
+        'about' => 'required|max:255',
         'continent' => 'required|max:191'
       ]);
 

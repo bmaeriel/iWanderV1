@@ -4,6 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Restaurant;
+use App\Address;
+use App\Detail;
+use App\Establishment;
+use App\Country;
+use App\City;
+use App\Municipality;
+use App\District;
+use App\Cuisine;
 
 class RestaurantController extends Controller
 {
@@ -24,6 +33,7 @@ class RestaurantController extends Controller
       $restaurants = Restaurant::all();
       return view('admin.restaurants.index')->with([
         'restaurants' => $restaurants
+
       ]);
     }
 
@@ -34,13 +44,19 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-      $addresses = Address::All();
-      $details = Detail::All();
-      $establishments = Establishment::All();
+      $countries = Country::orderBy('country_name', 'asc')->get();
+      $districts = District::orderBy('district_name','asc')->get();
+      $cities = City::orderBy('city_name','asc')->get();
+      $municipalities = Municipality::orderBy('municipality_name','asc')->get();
+      $establishments = Establishment::orderBy('establishment_name','asc')->get();
+      $cuisines = Cuisine::orderBy('cuisine_name','asc')->get();
       return view('admin.restaurants.create')->with([
-        'addresses' => $addresses,
-        'details' => $details,
-        'establishments' => $establishments
+        'countries' => $countries,
+        'districts' => $districts,
+        'cities' => $cities,
+        'municipalities' => $municipalities,
+        'establishments' => $establishments,
+        'cuisines' => $cuisines
       ]);
     }
 
@@ -54,21 +70,52 @@ class RestaurantController extends Controller
     {
       $request->validate([
         'restaurant_name' => 'required|max:191',
-        'detail_id' => 'required|integer',
-        'address_id' => 'required|integer',
-        'establishment_type_id' => 'required|integer'
+        'establishment_type_id' => 'required|integer',
+        'address1' => 'required|max:191',
+        'address2' => 'max:191',
+        'address3' => 'max:191',
+        'city_id' => 'required|integer',
+        'district_id' => 'required|integer',
+        'postal_code' => 'numeric|min:0',
+        'country_id' => 'required|integer',
+        'description' => 'required|max:255',
+        'website' => 'required|max:50',
+        'email' => 'required|max:191|email',
+        'phone' => 'required|max:13',
+        'min_price' => 'numeric',
+        'max_price' => 'numeric'
       ]);
 
-      $detail = Detail::find(1);
-      $address = Address::find(1);
-      $establishment = Establishment::find(1);
+      $address = new Address();
+      $address->address1 = $request->input('address1');
+      $address->address2 = $request->input('address2');
+      $address->address3 = $request->input('address3');
+      $address->municipality_id = $request->input('municipality_id');
+      $address->city_id = $request->input('city_id');
+      $address->district_id = $request->input('district_id');
+      $address->postal_code = $request->input('postal_code');
+      $address->country_id = $request->input('country_id');
+      $address->save();
+
+      $detail = new Detail();
+      $detail->description = $request->input('description');
+      $detail->website = $request->input('website');
+      $detail->email = $request->input('email');
+      $detail->phone = $request->input('phone');
+      $detail->min_price = $request->input('min_price');
+      $detail->max_price = $request->input('max_price');
+      $detail->save();
+
+      // $establishment = Establishment::find(1);
       $restaurant = new Restaurant();
       $restaurant->restaurant_name = $request->input('restaurant_name');
-      $restaurant->detail_id = $request->input('detail_id');
-      $restaurant->address_id = $request->input('address_id');
+      $restaurant->detail_id = $detail->id;
+      $restaurant->address_id = $address->id;
       $restaurant->establishment_type_id = $request->input('establishment_type_id');
-
+      $cuisine = $request->input('cuisine_id');
+      // dd($cuisine);
       $restaurant->save();
+      $restaurant->cuisines()->attach($cuisine);
 
       return redirect()->route('admin.restaurants.index');
     }
@@ -81,14 +128,9 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-
-      $detail = Detail::findOrFail($id);
-      $address = Address::findOrFail($id);
-      $establishment = Establishment::findOrFail($id);
+      $establishment = Establishment::findOrFail(1);
       $restaurant = Restaurant::findOrFail($id);
       return view('admin.restaurants.show')->with([
-        'detail' => $detail,
-        'address' => $address,
         'establishment' => $establishment,
         'restaurant' => $restaurant
       ]);
@@ -102,22 +144,23 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-      $addresses = Address::All();
-      $details = Detail::All();
-      $establishments = Establishment::All();
+      $countries = Country::orderBy('country_name', 'asc')->get();
+      $districts = District::orderBy('district_name','asc')->get();
+      $cities = City::orderBy('city_name','asc')->get();
+      $municipalities = Municipality::orderBy('municipality_name','asc')->get();
+      $establishments = Establishment::orderBy('establishment_name','asc')->get();
+      $cuisines = Cuisine::orderBy('cuisine_name','asc')->get();
 
-      $detail = Detail::findOrFail($id);
-      $address = Address::findOrFail($id);
-      $establishment = Establishment::findOrFail($id);
+      // dd($establishments);
       $restaurant = Restaurant::findOrFail($id);
       return view('admin.restaurants.edit')->with([
-        'addresses' => $addresses,
-        'details' => $details,
+        'countries' => $countries,
+        'districts' => $districts,
+        'cities' => $cities,
+        'municipalities' => $municipalities,
         'establishments' => $establishments,
-        'detail' => $detail,
-        'address' => $address,
-        'establishment' => $establishment,
-        'restaurant' => $restaurant
+        'restaurant' => $restaurant,
+        'cuisines' => $cuisines
       ]);
     }
 
@@ -130,24 +173,53 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $addresses = Address::All();
-      $details = Detail::All();
-      $establishments = Establishment::All();
-      $restaurant = Address::findOrFail($id);
+      $restaurant = Restaurant::findOrFail($id);
+      $detail = Detail::findOrFail(1);
+      $address = Address::findOrFail(1);
 
       $request->validate([
         'restaurant_name' => 'required|max:191',
-        'detail_id' => 'required|integer',
-        'address_id' => 'required|integer',
-        'establishment_type_id' => 'required|integer'
+        'establishment_type_id' => 'required|integer',
+        'address1' => 'required|max:191',
+        'address2' => 'max:191',
+        'address3' => 'max:191',
+        'city_id' => 'required|integer',
+        'district_id' => 'required|integer',
+        'postal_code' => 'numeric|min:0',
+        'country_id' => 'required|integer',
+        'description' => 'required|max:255',
+        'website' => 'required|max:50',
+        'email' => 'required|max:191|email',
+        'phone' => 'required|max:13',
+        'min_price' => 'numeric',
+        'max_price' => 'numeric'
       ]);
 
       $restaurant->restaurant_name = $request->input('restaurant_name');
-      $restaurant->detail_id = $request->input('detail_id');
-      $restaurant->address_id = $request->input('address_id');
+      $restaurant->addresses->address1 = $request->input('address1');
+      $restaurant->addresses->address2 = $request->input('address2');
+      $restaurant->addresses->address3 = $request->input('address3');
+      $restaurant->addresses->municipality_id = $request->input('municipality_id');
+      $restaurant->addresses->city_id = $request->input('city_id');
+      $restaurant->addresses->district_id = $request->input('district_id');
+      $restaurant->addresses->postal_code = $request->input('postal_code');
+      $restaurant->addresses->country_id = $request->input('country_id');
+      $restaurant->details->description = $request->input('description');
+      $restaurant->details->website = $request->input('website');
+      $restaurant->details->email = $request->input('email');
+      $restaurant->details->phone = $request->input('phone');
+      $restaurant->details->min_price = $request->input('min_price');
+      $restaurant->details->max_price = $request->input('max_price');
+      $restaurant->restaurant_name = $request->input('restaurant_name');
+      $restaurant->detail_id = $detail->id;
+      $restaurant->address_id = $address->id;
       $restaurant->establishment_type_id = $request->input('establishment_type_id');
-
+      $cuisine = $request->input('cuisine_id');
+      // dd($cuisine);
+      $restaurant->addresses->save();
+      $restaurant->details->save();
       $restaurant->save();
+      $restaurant->cuisines()->attach($cuisine);
 
       return redirect()->route('admin.restaurants.index');
     }

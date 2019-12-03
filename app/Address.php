@@ -28,4 +28,8 @@ class Address extends Model
   public function municipality() {
     return $this->belongsTo('App\Municipality','municipality_id');
   }
+
+  public function restaurants() {
+    return $this->hasOne('App\Restaurant');
+  }
 }

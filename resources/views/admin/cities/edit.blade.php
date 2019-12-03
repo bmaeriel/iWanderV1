@@ -30,14 +30,14 @@
                 <select name="district_id" class="form-control">
                   <option value="">Select District</option>
                   @foreach($districts as $district)
-                    <option value="{{ $district->id }}">
+                    <option value="{{ $district->id }}" {{ $district->id == $city->district_id ? "selected":"" }}>
                       {{$district->district_name}}
                     </option>
                   @endforeach
                 </select>              </div>
               <div class="form-group">
                 <label for="about">About</label>
-                <input type="text" class="form-control" id="about" name="about" value="{{ old('about', $city->about) }}" />
+                <textarea rows="5" type="text" class="form-control" id="about" name="about" value="{{ old('about', $city->about) }}" >{{$city->about}} </textarea>
               </div>
               <a href="{{ route('admin.cities.index') }}" class="btn btn-link"> Cancel </a>
               <button type="submit" class="btn btn-primary float-right"> Submit </button>

@@ -47,17 +47,15 @@ class AddressController extends Controller
      */
     public function create()
     {
-      $countries = Country::All();
-      $districts = District::All();
-      $cities = City::All();
-      $municipalities = Municipality::All();
-      $address = Address::all();
+      $countries = Country::orderBy('country_name', 'asc')->get();
+      $districts = District::orderBy('district_name','asc')->get();
+      $cities = City::orderBy('city_name','asc')->get();
+      $municipalities = Municipality::orderBy('municipality_name','asc')->get();
       return view('admin.addresses.create')->with([
         'countries' => $countries,
         'districts' => $districts,
         'cities' => $cities,
-        'municipalities' => $municipalities,
-        'address' => $address
+        'municipalities' => $municipalities
       ]);
     }
 
@@ -73,7 +71,6 @@ class AddressController extends Controller
         'address1' => 'required|max:191',
         'address2' => 'max:191',
         'address3' => 'max:191',
-        'municipality_id' => 'required|integer',
         'city_id' => 'required|integer',
         'district_id' => 'required|integer',
         'postal_code' => 'numeric|min:0',
@@ -107,17 +104,7 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-
-      $country = Country::findOrFail($id);
-      $district = District::findOrFail($id);
-      $city = City::findOrFail($id);
-      $municipality = Municipality::findOrFail($id);
-      $address = Address::findOrFail($id);
       return view('admin.addresses.show')->with([
-        'country' => $country,
-        'district' => $district,
-        'city' => $city,
-        'municipality' => $municipality,
         'address' => $address
       ]);
     }
@@ -135,20 +122,12 @@ class AddressController extends Controller
       $cities = City::All();
       $municipalities = Municipality::All();
 
-      $country = Country::findOrFail($id);
-      $district = District::findOrFail($id);
-      $city = City::findOrFail($id);
-      $municipality = Municipality::findOrFail($id);
       $address = Address::findOrFail($id);
       return view('admin.addresses.edit')->with([
         'countries' => $countries,
         'districts' => $districts,
         'cities' => $cities,
         'municipalities' => $municipalities,
-        'country' => $country,
-        'district' => $district,
-        'city' => $city,
-        'municipality' => $municipality,
         'address' => $address
       ]);
     }
@@ -162,17 +141,12 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $country = Country::findOrFail($id);
-      $district = District::findOrFail($id);
-      $city = City::findOrFail($id);
-      $municipality = Municipality::findOrFail($id);
-      $address = Address::findOrFail($id);
+      $address = Address::find($id);
 
       $request->validate([
         'address1' => 'required|max:191',
         'address2' => 'max:191',
         'address3' => 'max:191',
-        'municipality_id' => 'required|integer',
         'city_id' => 'required|integer',
         'district_id' => 'required|integer',
         'postal_code' => 'numeric|min:0',

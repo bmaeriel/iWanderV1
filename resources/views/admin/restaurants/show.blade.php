@@ -6,48 +6,44 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="card">
           <div class="card-header">
-            Address: {{$address->address1}}
+            Restaurant: {{$restaurant->restaurant_name}}
           </div>
           <div class="card-body">
               <table class="table table-hover">
                 <tbody>
                   <tr>
-                    <td>Address  1</td>
-                    <td>{{ $address->address1 }}</td>
+                    <td>Restaurant</td>
+                    <td>{{ $restaurant->restaurant_name }}</td>
                   </tr>
                   <tr>
-                    <td>Address  2</td>
-                    <td>{{ $address->address2}}</td>
+                    <td>Details</td>
+                    <td>{{ $restaurant->details->description}} </br>
+                        {{ $restaurant->details->website}}</br>
+                        {{ $restaurant->details->email}}</br>
+                        {{ $restaurant->details->phone}}
+                    </td>
                   </tr>
                   <tr>
-                    <td>Address  3</td>
-                    <td>{{ $address->address3 }}</td>
+                    <td>Address</td>
+                    <td>{{ $restaurant->addresses->address1 }}
+                        {{ $restaurant->addresses->address2 }}
+                        {{ $restaurant->addresses->address3 }} </br>
+                        {{ $restaurant->addresses->municipality_name }}
+                        {{ $restaurant->addresses->city->city_name }}</br>
+                        {{ $restaurant->addresses->district->district_name }}
+                        {{ $restaurant->addresses->postal_code}}
+                        {{ $restaurant->addresses->country->country_name }}</br>
+                    </td>
                   </tr>
                   <tr>
-                    <td>Municipality</td>
-                    <td>{{ $address->municipality->municipality_name }}</td>
-                  </tr>
-                  <tr>
-                    <td>District</td>
-                    <td>{{ $address->city->city_name }}</td>
-                  </tr>
-                  <tr>
-                    <td>District</td>
-                    <td>{{ $address->district->district_name }}</td>
-                  </tr>
-                  <tr>
-                    <td>Postal code</td>
-                    <td>{{ $address->postal_code }}</td>
-                  </tr>
-                  <tr>
-                    <td>Country</td>
-                    <td>{{ $address->country->country_name }}</td>
+                    <td>Establishment</td>
+                    <td>{{ $establishment->establishment_name }}</td>
                   </tr>
                 </tbody>
               </table>
-              <a href="{{ route('admin.addresses.index', $address->id)}}" class="btn btn-default">Back</a>
-              <a href="{{ route('admin.addresses.edit', $address->id)}}" class="btn btn-warning">Edit</a>
-              <form style="display:inline-block" method="POST" action="{{ route('admin.addresses.destroy', $city->id)}}">
+              <a href="{{ route('admin.restaurants.index', $restaurant->id)}}" class="btn btn-default">Back</a>
+              <a href="{{ route('admin.restaurants.edit', $restaurant->id)}}" class="btn btn-warning">Edit</a>
+              <form style="display:inline-block" method="POST" action="{{ route('admin.restaurants.destroy', $restaurant->id)}}">
                 <input type="hidden" name="_method" value="DELETE"/>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                 <button type="submit" class="form-control btn btn-danger">Delete</a>

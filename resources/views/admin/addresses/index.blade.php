@@ -18,7 +18,7 @@
                   <th>Address 1</th>
                   <th>Address 2</th>
                   <th>Address 3</th>
-                  <th>Municipality</th>
+                  {{-- <th>Municipality</th> --}}
                   <th>City</th>
                   <th>District</th>
                   <th>Postal code</th>
@@ -32,7 +32,7 @@
                       <td>{{ $address->address1 }}</td>
                       <td>{{ $address->address2 }}</td>
                       <td>{{ $address->address3 }}</td>
-                      <td>{{ $address->municipality->municipality_name }}</td>
+                      {{-- <td>{{ $address->municipality->municipality_name }}</td> --}}
                       <td>{{ $address->city->city_name }}</td>
                       <td>{{ $address->district->district_name }}</td>
                       <td>{{ $address->postal_code }}</td>

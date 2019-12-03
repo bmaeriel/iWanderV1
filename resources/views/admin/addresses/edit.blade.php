@@ -38,7 +38,7 @@
                 <select name="municipality_id" class="form-control">
                   <option value="">Select Municipality</option>
                   @foreach($municipalities as $municipality)
-                    <option value="{{ $municipality->id }}"  selected>
+                    <option value="{{ $municipality->id }}"  {{ $municipality->id == $address->municipality->id ? "selected":"" }}>
                       {{$municipality->municipality_name}}
                     </option>
                   @endforeach
@@ -49,7 +49,7 @@
                 <select name="city_id" class="form-control">
                   <option value="">Select City</option>
                   @foreach($cities as $city)
-                    <option value="{{ $city->id }}" selected>
+                    <option value="{{ $city->id }}" {{ $city->id == $address->city->id ? "selected":"" }}>
                       {{$city->city_name}}
                     </option>
                   @endforeach
@@ -60,7 +60,7 @@
                 <select name="district_id" class="form-control">
                   <option value="">Select District</option>
                   @foreach($districts as $district)
-                    <option value="{{ $district->id }}" selected>
+                    <option value="{{ $district->id }}" {{ $district->id == $address->district->id ? "selected":"" }}>
                       {{$district->district_name}}
                     </option>
                   @endforeach
@@ -75,7 +75,7 @@
                 <select name="country_id" class="form-control">
                   <option value="">Select Country</option>
                   @foreach($countries as $country)
-                    <option value="{{ $country->id }}" selected>
+                    <option value="{{ $country->id }}" {{ $country->id == $address->country->id ? "selected":"" }}>
                       {{$country->country_name}}
                     </option>
                   @endforeach

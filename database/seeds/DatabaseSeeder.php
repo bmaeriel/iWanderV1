@@ -22,5 +22,15 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CountryTableSeeder::class);
+        $this->call(DistrictSeederTable::class);
+        $this->call(CitySeederTable::class);
+        $this->call(MunicipalitySeederTable::class);
+        $this->call(CategorySeederTable::class);
+        $this->call(EstablishmentTableSeeder::class);
+        $this->call(MealTypeSeederTable::class);
+        $this->call(DietaryRestrictionSeederTable::class);
+        $this->call(FeatureSeederTable::class);
+        $this->call(CuisineSeederTable::class);
+
     }
 }

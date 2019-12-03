@@ -13,7 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detail extends Model
 {
-  public function attractions() {
-    return $this->belongsTo('App\Detail','detail_id');
+  // public function attractions() {
+  //   return $this->belongsTo('App\Detail','detail_id');
+  // }
+
+  public function restaurants() {
+    return $this->hasOne('App\Restaurant');
   }
 }

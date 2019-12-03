@@ -31,10 +31,10 @@ class CityController extends Controller
      */
     public function index()
     {
-      $city = City::all();
+      $cities = City::orderBy('city_name','asc')->get();
 
       return view('admin.cities.index')->with([
-        'cities' => $city
+        'cities' => $cities
       ]);
     }
 
@@ -45,11 +45,11 @@ class CityController extends Controller
      */
     public function create()
     {
-      $districts = District::all();
-      $city = City::all();
+      $districts = District::orderBy('district_name','asc')->get();
+      $cities = City::orderBy('city_name','asc')->get();
       return view('admin.cities.create')->with([
         'districts' => $districts,
-        'cities' => $city
+        'cities' => $cities
       ]);
     }
 
@@ -64,10 +64,9 @@ class CityController extends Controller
       $request->validate([
         'city_name' => 'required|max:191',
         'district_id' => 'required|integer',
-        'about' => 'required|max:191'
+        'about' => 'required|max:500'
       ]);
 
-      $district = District::find(1);
       $city = new City();
       $city->city_name = $request->input('city_name');
       $city->district_id = $request->input('district_id');
@@ -88,10 +87,8 @@ class CityController extends Controller
     {
 
       $city = City::findOrFail($id);
-      $district = District::findOrFail($id);
       return view('admin.cities.show')->with([
-        'city' => $city,
-        'district' => $district
+        'city' => $city
       ]);
     }
 
@@ -104,12 +101,10 @@ class CityController extends Controller
     public function edit($id)
     {
       $city = City::findOrFail($id);
-      $districts = District::All();
-      $district = District::findOrFail($id);
+      $districts = District::orderBy('district_name','asc')->get();
       return view('admin.cities.edit')->with([
         'city' => $city,
-        'districts' => $districts,
-        'district' => $district
+        'districts' => $districts
       ]);
     }
 
@@ -123,12 +118,11 @@ class CityController extends Controller
     public function update(Request $request, $id)
     {
       $city = City::findOrFail($id);
-      $district = District::findOrFail($id);
 
       $request->validate([
         'city_name' => 'required|max:191',
         'district_id' => 'required|integer',
-        'about' => 'required|max:255'
+        'about' => 'required|max:500'
       ]);
 
       $city->city_name = $request->input('city_name');
@@ -148,9 +142,7 @@ class CityController extends Controller
     public function destroy($id)
     {
       $city = City::findOrFail($id);
-
       $city->delete();
-
       return redirect()->route('admin.cities.index');
     }
 

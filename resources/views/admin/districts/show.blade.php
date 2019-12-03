@@ -17,7 +17,7 @@
                   </tr>
                   <tr>
                     <td>Country Name</td>
-                    <td>{{ $country->country_name }}</td>
+                    <td>{{ $district->country->country_name }}</td>
                   </tr>
                   <tr>
                     <td>About</td>

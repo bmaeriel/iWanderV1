@@ -25,7 +25,7 @@ class CreateAddressesTable extends Migration
             $table->string('address1');
             $table->string('address2')->nullable($value = true);
             $table->string('address3')->nullable($value = true);
-            $table->bigInteger('municipality_id')->unsigned();
+            $table->bigInteger('municipality_id')->unsigned()->nullable();
             $table->bigInteger('city_id')->unsigned();
             $table->bigInteger('district_id')->unsigned();
             $table->integer('postal_code')->nullable($value = true)->unsigned();

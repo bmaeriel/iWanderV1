@@ -110,6 +110,50 @@ Route::get('/admin/establishments/{id}/edit', 'Admin\EstablishmentController@edi
 Route::put('/admin/establishments/{id}', 'Admin\EstablishmentController@update')->name('admin.establishments.update');
 Route::delete('/admin/establishments/{id}', 'Admin\EstablishmentController@destroy')->name('admin.establishments.destroy');
 
+//Meal Types
+Route::get('/admin/mealtypes', 'Admin\MealTypeController@index')->name('admin.mealtypes.index');
+Route::get('/admin/mealtypes/create', 'Admin\MealTypeController@create')->name('admin.mealtypes.create');
+Route::get('/admin/mealtypes/{id}', 'Admin\MealTypeController@show')->name('admin.mealtypes.show');
+Route::post('/admin/mealtypes/store', 'Admin\MealTypeController@store')->name('admin.mealtypes.store');
+Route::get('/admin/mealtypes/{id}/edit', 'Admin\MealTypeController@edit')->name('admin.mealtypes.edit');
+Route::put('/admin/mealtypes/{id}', 'Admin\MealTypeController@update')->name('admin.mealtypes.update');
+Route::delete('/admin/mealtypes/{id}', 'Admin\MealTypeController@destroy')->name('admin.mealtypes.destroy');
+
+//Dietary Restriction
+Route::get('/admin/dietaryrestrictions', 'Admin\DietaryRestrictionController@index')->name('admin.dietaryrestrictions.index');
+Route::get('/admin/dietaryrestrictions/create', 'Admin\DietaryRestrictionController@create')->name('admin.dietaryrestrictions.create');
+Route::get('/admin/dietaryrestrictions/{id}', 'Admin\DietaryRestrictionController@show')->name('admin.dietaryrestrictions.show');
+Route::post('/admin/dietaryrestrictions/store', 'Admin\DietaryRestrictionController@store')->name('admin.dietaryrestrictions.store');
+Route::get('/admin/dietaryrestrictions/{id}/edit', 'Admin\DietaryRestrictionController@edit')->name('admin.dietaryrestrictions.edit');
+Route::put('/admin/dietaryrestrictions/{id}', 'Admin\DietaryRestrictionController@update')->name('admin.dietaryrestrictions.update');
+Route::delete('/admin/dietaryrestrictions/{id}', 'Admin\DietaryRestrictionController@destroy')->name('admin.dietaryrestrictions.destroy');
+
+//Features
+Route::get('/admin/features', 'Admin\FeatureController@index')->name('admin.features.index');
+Route::get('/admin/features/create', 'Admin\FeatureController@create')->name('admin.features.create');
+Route::get('/admin/features/{id}', 'Admin\FeatureController@show')->name('admin.features.show');
+Route::post('/admin/features/store', 'Admin\FeatureController@store')->name('admin.features.store');
+Route::get('/admin/features/{id}/edit', 'Admin\FeatureController@edit')->name('admin.features.edit');
+Route::put('/admin/features/{id}', 'Admin\FeatureController@update')->name('admin.features.update');
+Route::delete('/admin/features/{id}', 'Admin\FeatureController@destroy')->name('admin.features.destroy');
+
+//Cuisines
+Route::get('/admin/cuisines', 'Admin\CuisineController@index')->name('admin.cuisines.index');
+Route::get('/admin/cuisines/create', 'Admin\CuisineController@create')->name('admin.cuisines.create');
+Route::get('/admin/cuisines/{id}', 'Admin\CuisineController@show')->name('admin.cuisines.show');
+Route::post('/admin/cuisines/store', 'Admin\CuisineController@store')->name('admin.cuisines.store');
+Route::get('/admin/cuisines/{id}/edit', 'Admin\CuisineController@edit')->name('admin.cuisines.edit');
+Route::put('/admin/cuisines/{id}', 'Admin\CuisineController@update')->name('admin.cuisines.update');
+Route::delete('/admin/cuisines/{id}', 'Admin\CuisineController@destroy')->name('admin.cuisines.destroy');
+
+//Cuisines
+Route::get('/admin/businesshours', 'Admin\BusinessHourController@index')->name('admin.businesshours.index');
+Route::get('/admin/businesshours/create', 'Admin\BusinessHourController@create')->name('admin.businesshours.create');
+Route::get('/admin/businesshours/{id}', 'Admin\BusinessHourController@show')->name('admin.businesshours.show');
+Route::post('/admin/businesshours/store', 'Admin\BusinessHourController@store')->name('admin.businesshours.store');
+Route::get('/admin/businesshours/{id}/edit', 'Admin\BusinessHourController@edit')->name('admin.businesshours.edit');
+Route::put('/admin/businesshours/{id}', 'Admin\BusinessHourController@update')->name('admin.businesshours.update');
+Route::delete('/admin/businesshours/{id}', 'Admin\BusinessHourController@destroy')->name('admin.businesshours.destroy');
 
 Route::get('/user/restaurants', 'User\RestaurantController@index')->name('user.restaurants.index');
 Route::get('/user/restaurants/{id}', 'User\RestaurantController@show')->name('user.restaurants.show');

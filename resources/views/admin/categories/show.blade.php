@@ -13,7 +13,7 @@
                 <tbody>
                   <tr>
                     <td>Category</td>
-                    <td>{{ $category->country_name }}</td>
+                    <td>{{ $category->category_name }}</td>
                   </tr>
                 </tbody>
               </table>

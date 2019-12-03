@@ -24,7 +24,7 @@ class CreateDistrictsTable extends Migration
             $table->bigIncrements('id');
             $table->string('district_name');
             $table->bigInteger('country_id')->unsigned();
-            $table->string('about');
+            $table->longText('about','255');
             // $table->integet('view_count');
             $table->timestamps();
 

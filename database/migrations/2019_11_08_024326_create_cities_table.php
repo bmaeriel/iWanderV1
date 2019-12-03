@@ -24,7 +24,7 @@ class CreateCitiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('city_name');
             $table->bigInteger('district_id')->unsigned();
-            $table->string('about');
+            $table->string('about','255');
             // $table->integer('view_count');
             $table->timestamps();
 

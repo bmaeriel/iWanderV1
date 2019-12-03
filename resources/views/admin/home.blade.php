@@ -30,6 +30,18 @@
                     <a href="{{route('admin.categories.index')}}">Categories</a>
                     <br/>
                     <a href="{{route('admin.establishments.index')}}">Establishments</a>
+                    <br/>
+                    <a href="{{route('admin.restaurants.index')}}">Restaurants</a>
+                    <br/>
+                    <a href="{{route('admin.mealtypes.index')}}">Meal Type</a>
+                    <br/>
+                    <a href="{{route('admin.dietaryrestrictions.index')}}">Dietary Restrictions</a>
+                    <br/>
+                    <a href="{{route('admin.features.index')}}"> Features</a>
+                    <br/>
+                    <a href="{{route('admin.cuisines.index')}}"> Cuisines</a>
+                    <br/>
+                    <a href="{{route('admin.businesshours.index')}}"> Business hours</a>
                 </div>
             </div>
         </div>

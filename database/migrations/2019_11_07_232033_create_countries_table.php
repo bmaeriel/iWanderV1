@@ -23,7 +23,7 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('country_name');
-            $table->string('about');
+            $table->string('about','255');
             $table->string('continent');
             $table->timestamps();
         });

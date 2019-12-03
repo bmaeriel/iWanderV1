@@ -24,7 +24,7 @@ class MunicipalityController extends Controller
       $this->middleware('auth');
       $this->middleware('role:admin');
   }
-  
+
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +32,9 @@ class MunicipalityController extends Controller
      */
     public function index()
     {
-      $municipality = Municipality::all();
+      $municipalities = Municipality::orderBy('municipality_name','asc')->get();
       return view('admin.municipalities.index')->with([
-        'municipalities' => $municipality
+        'municipalities' => $municipalities
       ]);
     }
 
@@ -45,11 +45,9 @@ class MunicipalityController extends Controller
      */
     public function create()
     {
-      $cities = City::All();
-      $municipality = Municipality::all();
+      $cities = City::orderBy('city_name','asc')->get();
       return view('admin.municipalities.create')->with([
-        'cities' => $cities,
-        'municipalities' => $municipality
+        'cities' => $cities
       ]);
     }
 
@@ -68,7 +66,6 @@ class MunicipalityController extends Controller
         // 'view_count' => 'required|max:191'
       ]);
 
-      $city = City::find(1);
       $municipality = new Municipality();
       $municipality->municipality_name = $request->input('municipality_name');
       $municipality->city_id = $request->input('city_id');
@@ -88,10 +85,8 @@ class MunicipalityController extends Controller
     public function show($id)
     {
       $municipality = Municipality::findOrFail($id);
-      $city = Country::findOrFail($id);
       return view('admin.municipalities.show')->with([
-        'municipality' => $municipality,
-        'city' => $city
+        'municipality' => $municipality
       ]);
     }
 
@@ -104,12 +99,10 @@ class MunicipalityController extends Controller
     public function edit($id)
     {
       $municipality = Municipality::findOrFail($id);
-      $cities = City::All();
-      $city = City::findOrFail($id);
+      $cities = City::orderBy('city_name','asc')->get();
       return view('admin.municipalities.edit')->with([
         'municipality' => $municipality,
-        'cities' => $cities,
-        'city' => $city
+        'cities' => $cities
       ]);
     }
 
@@ -122,7 +115,6 @@ class MunicipalityController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $city = City::findOrFail($id);
       $municipality = Municipality::findOrFail($id);
 
       $request->validate([

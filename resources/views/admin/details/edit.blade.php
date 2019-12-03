@@ -30,19 +30,19 @@
                 <input type="text" class="form-control" id="website" name="website" value="{{ old('website', $detail->website) }}" />
               </div>
               <div class="form-group">
-                <label for="email">Website</label>
+                <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" value="{{ old('email', $detail->email) }}" />
               </div>
               <div class="form-group">
-                <label for="phone">Website</label>
+                <label for="phone">Phone</label>
                 <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', $detail->phone) }}" />
               </div>
               <div class="form-group">
-                <label for="min_price">Website</label>
+                <label for="min_price">Minimum price</label>
                 <input type="text" class="form-control" id="min_price" name="min_price" value="{{ old('min_price', $detail->min_price) }}" />
               </div>
               <div class="form-group">
-                <label for="max_price">Website</label>
+                <label for="max_price">Maximum price</label>
                 <input type="text" class="form-control" id="max_price" name="max_price" value="{{ old('max_price', $detail->max_price) }}" />
               </div>
               <a href="{{ route('admin.details.index') }}" class="btn btn-link"> Cancel </a>

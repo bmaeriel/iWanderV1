@@ -30,7 +30,7 @@
                 <select name="country_id" class="form-control">
                   <option value="">Select Country</option>
                   @foreach($countries as $country)
-                    <option value="{{ $country->id }}">
+                    <option value="{{ $country->id }}" {{ $country->id == $district->country->id ? "selected":"" }}>
                       {{$country->country_name}}
                     </option>
                   @endforeach
@@ -38,7 +38,7 @@
               </div>
               <div class="form-group">
                 <label for="about">About</label>
-                <input type="text" class="form-control" id="about" name="about" value="{{ old('about', $district->about) }}" />
+                <textarea rows="5" type="text" class="form-control" id="about" name="about" value="{{ old('about', $district->about) }}">{{$district->about}} </textarea>
               </div>
               <a href="{{ route('admin.districts.index') }}" class="btn btn-link"> Cancel </a>
               <button type="submit" class="btn btn-primary float-right"> Submit </button>
